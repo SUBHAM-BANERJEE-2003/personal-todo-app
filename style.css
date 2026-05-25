@@ -1,0 +1,414 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --todo-bg: rgba(15, 23, 42, 0.6);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --success: #10b981;
+    --danger: #ef4444;
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --cat-examstudy: #f97316; /* orange */
+    --cat-technology: #06b6d4; /* teal */
+    --cat-coding: #7c3aed; /* purple */
+}
+
+[data-theme="light"] {
+    --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --todo-bg: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.05);
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.app-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 720px;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.stats-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-box {
+    flex: 1;
+    background: var(--todo-bg);
+    padding: 15px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.stat-box span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.stat-box p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 120px 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+select, textarea, input[type="datetime-local"] {
+    background: var(--todo-bg);
+    border: 1px solid var(--border-color);
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: var(--text-main);
+    outline: none;
+}
+
+/* Ensure textarea spans full width of the grid */
+.input-grid textarea {
+    grid-column: 1 / -1;
+    min-width: 0;
+}
+
+/* Place pin and button neatly in the last row */
+.pin-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    justify-self: start;
+    grid-column: 1 / 2;
+}
+
+.pin-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+.primary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    justify-self: end;
+    grid-column: 4 / 5;
+}
+
+/* prevent inputs from overflowing grid cells */
+.input-grid input, .input-grid select {
+    min-width: 0;
+}
+
+.pin-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+.primary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+#todo-input {
+    flex: 1;
+    background: var(--todo-bg);
+    border: 1px solid var(--border-color);
+    padding: 14px 20px;
+    border-radius: 14px;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#todo-input:focus {
+    border-color: var(--accent);
+}
+
+#todo-input::placeholder {
+    color: var(--text-muted);
+}
+
+#add-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.1s;
+}
+
+#add-btn:hover {
+    background: var(--accent-hover);
+}
+
+#add-btn:active {
+    transform: scale(0.95);
+}
+
+.filter-wrapper {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+#todo-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Custom Scrollbar */
+#todo-list::-webkit-scrollbar {
+    width: 5px;
+}
+#todo-list::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    backdrop-filter: blur(6px);
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.todo-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.category-badge {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+}
+
+.category-examstudy { background: var(--cat-examstudy); }
+.category-technology { background: var(--cat-technology); }
+.category-coding { background: var(--cat-coding); }
+
+.pinned {
+    box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+    border-left: 4px solid var(--accent);
+}
+
+.todo-text {
+    color: var(--text-main);
+    font-size: 0.95rem;
+    word-break: break-word;
+    transition: all 0.2s;
+}
+
+.check-btn {
+    background: none;
+    border: 2px solid var(--text-muted);
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    font-size: 0.7rem;
+}
+
+.todo-item.completed .check-btn {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 5px;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+.delete-btn:hover {
+    color: var(--danger);
+}
+
+/* Responsive Tweaks */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .app-container {
+        padding: 20px;
+        border-radius: 16px;
+    }
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
+    .pin-label, .primary-btn {
+        grid-column: auto;
+        justify-self: stretch;
+    }
+
+    /* Make filter buttons more compact on very small screens */
+    .filter-btn { padding: 6px 10px; font-size: 0.8rem; }
+}
+
+/* Medium breakpoint: two-column layout for the form */
+@media (max-width: 720px) and (min-width: 481px) {
+    .input-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-flow: dense;
+    }
+    .input-grid select, .input-grid input[type="datetime-local"] {
+        width: 100%;
+    }
+    .input-grid textarea { grid-column: 1 / -1; }
+    .pin-label { grid-column: 1 / 2; justify-self: start; }
+    .primary-btn { grid-column: 2 / 3; justify-self: end; }
+    .input-grid input, .input-grid select { min-width: 0; }
+
+    /* Allow filter wrapper to scroll horizontally if it still overflows */
+    .filter-wrapper { overflow-x: auto; }
+}

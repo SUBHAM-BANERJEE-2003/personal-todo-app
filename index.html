@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Targets</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Daily Targets</h1>
+            <button id="theme-toggle" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <div class="stats-container">
+            <div class="stat-box">
+                <span id="completed-count">0</span>
+                <p>Completed</p>
+            </div>
+            <div class="stat-box">
+                <span id="pending-count">0</span>
+                <p>Pending</p>
+            </div>
+        </div>
+
+        <form id="todo-form">
+            <div class="input-grid">
+                <input type="text" id="todo-input" placeholder="Task title" required autocomplete="off">
+
+                <select id="todo-category" aria-label="Category">
+                    <option value="examstudy">ExamStudy</option>
+                    <option value="technology">Technology</option>
+                    <option value="coding">Coding</option>
+                </select>
+
+                <input type="datetime-local" id="todo-start" placeholder="Start (optional)">
+                <input type="datetime-local" id="todo-end" placeholder="End (optional)">
+
+                <textarea id="todo-desc" placeholder="Description (optional)" rows="2"></textarea>
+
+                <label class="pin-label">
+                    <input type="checkbox" id="todo-pin">
+                    Pin
+                </label>
+
+                <button type="submit" id="add-btn" class="primary-btn">
+                    <i class="fas fa-plus"></i> Add
+                </button>
+            </div>
+        </form>
+
+        <div class="filter-wrapper">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="pending">Pending</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+            <button class="filter-btn" data-filter="examstudy">ExamStudy</button>
+            <button class="filter-btn" data-filter="technology">Technology</button>
+            <button class="filter-btn" data-filter="coding">Coding</button>
+        </div>
+
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
